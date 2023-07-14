@@ -23,7 +23,11 @@ To use the GameCMS Scheme Maker:
 2. Use the interactive interface and the provided buttons to create your `scheme.json` file settings (e.g., add header, add config option, remove config option, remove header).
 3. Your changes will be dynamically updated and reflected on the interface.
 4. When you're finished, click the "Save" button to download your `scheme.json` file.
+<<<<<<< HEAD
 5. Finally, upload your `scheme.json` file to the GameCMS platform as part of your custom template.
 
 ## Quick Tutorial
 [![QuckTutorial](https://cdn.gamecms.org/platform/img/scheme-thumbnail.png)](https://cdn.gamecms.org/videos/how-to-make-custom-scheme.mp4)
+=======
+5. Finally, upload your `scheme.json` file to the GameCMS platform as part of your custom template.
+>>>>>>> 66e2fd9959aca425dfea73e659c9aeaf13f3cfad
