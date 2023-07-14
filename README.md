@@ -8,6 +8,10 @@ GameCMS Scheme Maker is a web-based tool specifically designed for creating `sch
 - Dynamic button creation for interacting with scheme settings.
 - Directly download your `scheme.json` file from the browser.
 
+## Live Version
+
+For your convenience, a live version of GameCMS Scheme Maker is available. You can use it directly from your web browser by following this [link](https://cdn.gamecms.org/scheme-maker.html).
+
 ## Installation
 
 To use the GameCMS Scheme Maker, follow these steps:
@@ -26,4 +30,4 @@ To use the GameCMS Scheme Maker:
 5. Finally, upload your `scheme.json` file to the GameCMS platform as part of your custom template.
 
 ## Quick Tutorial
-[![QuckTutorial](https://cdn.gamecms.org/platform/scheme-thumbnail.png)](https://cdn.gamecms.org/videos/how-to-make-custom-scheme.mp4)
+[![QuickTutorial](https://cdn.gamecms.org/platform/scheme-thumbnail.png)](https://cdn.gamecms.org/videos/how-to-make-custom-scheme.mp4)
