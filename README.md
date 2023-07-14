@@ -26,4 +26,4 @@ To use the GameCMS Scheme Maker:
 5. Finally, upload your `scheme.json` file to the GameCMS platform as part of your custom template.
 
 ## Quick Tutorial
-[![QuckTutorial](https://cdn.gamecms.org/platform/img/scheme-thumbnail.png)](https://cdn.gamecms.org/videos/how-to-make-custom-scheme.mp4)
+[![QuckTutorial](https://cdn.gamecms.org/platform/scheme-thumbnail.png)](https://cdn.gamecms.org/videos/how-to-make-custom-scheme.mp4)
