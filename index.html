@@ -13,80 +13,39 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 
-<style>
-    .custom-btn {
-        font-size: 19px;
-        color: white;
-        border: none;
-        transition: background-color 0.3s ease;
-    }
+    <style>
+        .custom-btn {
+            font-size: 19px;
+            color: white;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
 
-    .custom-btn i {
-        transition: color 0.3s ease;
-    }
+        .custom-btn i {
+            transition: color 0.3s ease;
+        }
 
-    .custom-btn.save-btn {
-        background-color: #4CAF50;
-    }
+        .custom-btn.save-btn {
+            background-color: #4CAF50;
+        }
 
-    .custom-btn.add-header-btn {
-        background-color: #2196F3;
-    }
+        .custom-btn.add-header-btn {
+            background-color: #2196F3;
+        }
 
-    .custom-btn.add-config-btn {
-        background-color: #f44336;
-    }
+        .custom-btn.add-config-btn {
+            background-color: #f44336;
+        }
 
-    .custom-btn.remove-config-btn {
-        background-color: #e91e63;
-    }
+        .custom-btn.remove-config-btn {
+            background-color: #e91e63;
+        }
 
-    .custom-btn.remove-header-btn {
-        background-color: #9c27b0;
-    }
+        .custom-btn.remove-header-btn {
+            background-color: #9c27b0;
+        }
 
-    /* Hover styles */
-    .custom-btn.save-btn:hover {
-        background-color: #388E3C;
-    }
-
-    .custom-btn.save-btn:hover i {
-        color: #FFD700;  /* Gold */
-    }
-
-    .custom-btn.add-header-btn:hover {
-        background-color: #1976D2;
-    }
-
-    .custom-btn.add-header-btn:hover i {
-        color: #FF4500;  /* OrangeRed */
-    }
-
-    .custom-btn.add-config-btn:hover {
-        background-color: #D32F2F;
-    }
-
-    .custom-btn.add-config-btn:hover i {
-        color: #90EE90;  /* LightGreen */
-    }
-
-    .custom-btn.add-header-btn:hover {
-        background-color: #1976D2;
-    }
-
-    .custom-btn.add-header-btn:hover i {
-        color: #800080;  /* Purple */
-    }
-
-    .custom-btn.remove-header-btn:hover {
-        background-color: #7B1FA2;
-    }
-
-    .custom-btn.remove-header-btn:hover i {
-        color: #32CD32;  /* LimeGreen */
-    }
-
-</style>
+    </style>
 
 </head>
 <body>
@@ -102,15 +61,21 @@
                 <label for="author" class="form-label">
                     Author
                 </label>
-                <input class="form-control" name="author" id="author" placeholder="Your nickname" required>
+                <input class="form-control"
+                       name="author" id="author"
+                       placeholder="Your nickname" required>
             </div>
             <div class="card-footer">
                 <!-- Add New Header Button -->
-                <button type="button" class="btn custom-btn add-header-btn" id="addHeader">
+                <button type="button"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Click to add header!"
+                        class="btn custom-btn add-header-btn"
+                        id="addHeader">
                     <i class="fas fa-file-alt"></i>
                     <i class="fas fa-plus-circle"></i>
                 </button>
-                <button class="btn custom-btn save-btn">
+                <button class="btn custom-btn save-btn"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Click to download scheme.json file!">
                     <i class="fas fa-save"></i>
                 </button>
             </div>
@@ -120,14 +85,32 @@
 </form>
 <script>
     $(document).ready(() => {
+        $('[data-bs-toggle="tooltip"]').tooltip();
+
+        $(document).on('click', '[data-bs-toggle="tooltip"]', function () {
+            $(this).tooltip('hide');
+        });
+
         let headerIndex = 1;
+
+        function downloadSchemeFile(data) {
+            let jsonStr = JSON.stringify(data, null, 2);
+            let blob = new Blob([jsonStr], {type: "application/json"});
+            let url = URL.createObjectURL(blob);
+
+            let a = document.createElement('a');
+            a.download = 'scheme.json';
+            a.href = url;
+            a.click();
+        }
 
         $('#addHeader').on('click', () => {
             $('#headers').append(`
             <div class="card mb-3 header-card" data-id="${headerIndex}">
                 <div class="card-body">
                      <div class="mb-2">
-                        <button
+                        <button data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Click to remove the header."
                                 data-id="${headerIndex}"
                              type="button" class="btn custom-btn remove-header-btn">
                             <i class="fas fa-file-alt"></i>
@@ -143,6 +126,9 @@
                         </div>
                         <div class="mt-3">
                             <button type="button"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Click to add header options."
                                     data-id="${headerIndex}"
                                     class="btn custom-btn add-config-btn">
                                 <i class="fas fa-cogs"></i>
@@ -154,6 +140,7 @@
             </div>
         `);
             headerIndex++;
+            $('[data-bs-toggle="tooltip"]').not('.tooltip-initialized').tooltip().addClass('tooltip-initialized');
         });
 
         let optionIndex = 1;
@@ -165,8 +152,10 @@
             <div class="card option-row mb-2 border-1 border-info" data-header="${headerId}" data-id="${optionIndex}" xmlns="http://www.w3.org/1999/html">
                 <div class="card-body">
                     <div class="mb-2">
-                        <button
-                                data-id="${optionIndex}"
+                        <button data-id="${optionIndex}"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="Click to remove this option."
                                 type="button" class="btn custom-btn remove-config-btn">
                             <i class="fas fa-cogs"></i>
                             <i class="fas fa-minus"></i>
@@ -185,8 +174,13 @@
                                     <option value="select">Select</option>
                                 </select>
                                 <div class="values-container" style="display:none">
-                                    <button class="add-value-btn btn btn-secondary mt-2 mb-2"
-                                      data-id="${optionIndex}" type="button">Add Value</button>
+                                    <button
+                                        class="add-value-btn btn btn-secondary mt-2 mb-2"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Click to add value for Option Type 'Select'"
+                                        data-id="${optionIndex}"
+                                        type="button">Add Value</button>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -207,6 +201,8 @@
         `;
             $(`#option-container-${headerId}`).append(optionHtml);
             optionIndex++;
+            $('[data-bs-toggle="tooltip"]').not('.tooltip-initialized').tooltip().addClass('tooltip-initialized');
+
         });
 
         // Remove option and header
@@ -234,10 +230,15 @@
             const valueHtml = `
             <div class="input-group mb-3">
                 <input type="text" class="form-control option-value" name="option-value-${selectIndex}[]" required>
-                <button class="remove-value-btn btn btn-danger" type="button">Remove</button>
+                <button class="remove-value-btn btn btn-danger"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Click to remove this value."
+                    type="button">Remove</button>
             </div>
         `;
             $(`#option-type-${selectIndex}`).siblings('.values-container').append(valueHtml);
+            $('[data-bs-toggle="tooltip"]').not('.tooltip-initialized').tooltip().addClass('tooltip-initialized');
         });
 
         // Remove a value from the select option
@@ -294,11 +295,7 @@
                 "author": author,
                 "config": configs
             };
-
-            console.log(output);
-
-            const copy = JSON.stringify(output);
-            navigator.clipboard.writeText(copy).then(() => alert("Copied!"));
+            downloadSchemeFile(output)
         });
     });
 
